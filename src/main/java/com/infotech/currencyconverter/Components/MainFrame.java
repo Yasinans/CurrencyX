@@ -22,9 +22,44 @@ public class MainFrame extends JFrame {
             scaledHoveredSwapImage, scaledRedCircleImage, scaledGreenCircleImage, scaledIconImage;
     private CurrencyRates currencyRates;
 
+    private JList<String> CurrencyList1;
+    private JList<String> CurrencyList2;
+    private JScrollPane CurrencyScroll1;
+    private JScrollPane CurrencyScroll2;
+    private JPanel CurrencySelectorPanel1;
+    private JPanel CurrencySelectorPanel2;
+    private JToggleButton HomeButton;
+    private JPanel HomePanel;
+    private JLabel LastUpdatedLabel;
+    private JPanel MainPanel;
+    private JPanel Nav;
+    private JLabel RateLabel;
+
+    private JToggleButton SettingButton;
+    private JPanel SettingPanel;
+    private JLabel StatusLabel;
+    private JButton firstCurListButton;
+    private JTextField firstCurrencyField;
+    private JLabel headerLabel;
+    private JSeparator jSeparator1;
+    private JSeparator jSeparator2;
+    private JSeparator jSeparator3;
+    private JButton resetButton;
+    private JLabel resetLabel1;
+    private JPanel resetPanel;
+    private JButton secondCurListButton;
+    private JTextField secondCurrencyField;
+    private JButton switchButton;
+    private JButton syncButton;
+    private JPanel syncPanel;
+    private JLabel syncStatusLabel;
+    private JLabel synchronizeLabel;
+
     public MainFrame() throws IOException {
         firstCur = 0;
         secondCur = 0;
+        firstCurSymbol = "PHP";
+        secondCurSymbol = "USD";
         currencyRates = new CurrencyRates();
         initializeAssets();
         initComponents();
@@ -37,7 +72,10 @@ public class MainFrame extends JFrame {
         SettingPanel.setVisible(false);
         syncStatusLabel.setVisible(false);
     }
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+
+    /***
+     * Initializes the components
+     */
     private void initComponents() {
 
         Nav = new JPanel();
@@ -230,8 +268,6 @@ public class MainFrame extends JFrame {
 
         CurrencySelectorPanel1.add(CurrencyScroll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 190));
 
-
-
         HomePanel.add(CurrencySelectorPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 50, 190));
 
         RateLabel.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
@@ -326,6 +362,9 @@ public class MainFrame extends JFrame {
         pack();
     }
 
+    /***
+     * Initializes the listeners
+     */
     private void initializeListeners() {
         CurrencyList1.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -388,6 +427,13 @@ public class MainFrame extends JFrame {
         });
     }
 
+    /***
+     *
+     * @param selectedButton The button that is being selected
+     * @param otherButton The previous selected button
+     * @param showPanel The panel that will be shown after a click
+     * @param hidePanel The panel that will be hidden after a click
+     */
     private void togglePanels(JToggleButton selectedButton, JToggleButton otherButton,
                               JPanel showPanel, JPanel hidePanel) {
         if (otherButton.isSelected()) {
@@ -401,15 +447,20 @@ public class MainFrame extends JFrame {
         }
     }
 
+    /***
+     * Updates the Currency List Components to match with the current Currency List data of the currencyRates variable.
+     */
     private void updateJList(){
         String[] currencyList = currencyRates.getCurrencyList().toArray(new String[0]);
         CurrencyList1.setListData(currencyList);
         CurrencyList2.setListData(currencyList);
     }
 
+    /***
+     * Initalizes the assets
+     * @throws IOException
+     */
     private void initializeAssets() throws IOException {
-        firstCurSymbol = "PHP";
-        secondCurSymbol = "USD";
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Icons/icon.png")));
         scaledHomeImage = scaleImage("/Icons/Home.png", 25, 25);
         scaledSwapImage = scaleImage("/Icons/Swap.png", 30, 30);
@@ -421,6 +472,7 @@ public class MainFrame extends JFrame {
         scaledIconImage = scaleImage("/Icons/icon.png", 70, 70);
     }
 
+    //Method used to scale an image and return as a ImageIcon
     private ImageIcon scaleImage(String path, int width, int height) throws IOException {
         BufferedImage image = ImageIO.read(MainFrame.class.getResource(path));
         return new ImageIcon(image.getScaledInstance(width, height, Image.SCALE_SMOOTH));
@@ -446,6 +498,9 @@ public class MainFrame extends JFrame {
         switchCurrencies();
     }
 
+    /*
+        The method that is being called after the user's click the switch button
+     */
     private void switchCurrencies() {
         firstCurListButton.setText(secondCurSymbol);
         secondCurListButton.setText(firstCurSymbol);
@@ -464,6 +519,9 @@ public class MainFrame extends JFrame {
         resetData();
     }
 
+    /*
+        The method used whenever the user's clicks the Reset Button. It is used to remove the locally stored data.
+     */
     private void resetData() {
         try {
             currencyRates.deleteLocalData();
@@ -485,6 +543,9 @@ public class MainFrame extends JFrame {
         updateJList();
     }
 
+    /*
+        Updates the variable and does a check if ever the user's input is invalid
+     */
     private void updateInputValues(){
         try {
             firstCur = Double.parseDouble(firstCurrencyField.getText());
@@ -500,42 +561,11 @@ public class MainFrame extends JFrame {
         }
     }
 
+    // Changes the API Connection Status Label
     private void changeStatus(boolean status) {
         LastUpdatedLabel.setText("Last Update: " + currencyRates.getPreviousUpdate());
         StatusLabel.setText(status ? "Online" : "Offline");
         StatusLabel.setIcon(status ? scaledGreenCircleImage : scaledRedCircleImage);
     }
 
-    private JList<String> CurrencyList1;
-    private JList<String> CurrencyList2;
-    private JScrollPane CurrencyScroll1;
-    private JScrollPane CurrencyScroll2;
-    private JPanel CurrencySelectorPanel1;
-    private JPanel CurrencySelectorPanel2;
-    private JToggleButton HomeButton;
-    private JPanel HomePanel;
-    private JLabel LastUpdatedLabel;
-    private JPanel MainPanel;
-    private JPanel Nav;
-    private JLabel RateLabel;
-
-    private JToggleButton SettingButton;
-    private JPanel SettingPanel;
-    private JLabel StatusLabel;
-    private JButton firstCurListButton;
-    private JTextField firstCurrencyField;
-    private JLabel headerLabel;
-    private JSeparator jSeparator1;
-    private JSeparator jSeparator2;
-    private JSeparator jSeparator3;
-    private JButton resetButton;
-    private JLabel resetLabel1;
-    private JPanel resetPanel;
-    private JButton secondCurListButton;
-    private JTextField secondCurrencyField;
-    private JButton switchButton;
-    private JButton syncButton;
-    private JPanel syncPanel;
-    private JLabel syncStatusLabel;
-    private JLabel synchronizeLabel;
 }
