@@ -51,14 +51,11 @@ public class MainFrame extends JFrame {
         secondCurrencyField = new JTextField();
         switchButton = new JButton();
         CurrencySelectorPanel2 = new JPanel();
-        SearchField2 = new JTextField();
         CurrencyScroll2 = new JScrollPane();
         CurrencyList2 = new JList<>();
         CurrencySelectorPanel1 = new JPanel();
-        SearchField1 = new JTextField();
         CurrencyScroll1 = new JScrollPane();
         CurrencyList1 = new JList<>();
-        SearchField3 = new JTextField();
         RateLabel = new JLabel();
         LastUpdatedLabel = new JLabel();
         StatusLabel = new JLabel();
@@ -208,13 +205,6 @@ public class MainFrame extends JFrame {
         CurrencySelectorPanel2.setBackground(new java.awt.Color(255, 255, 255));
         CurrencySelectorPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SearchField2.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        SearchField2.setHorizontalAlignment(JTextField.CENTER);
-        SearchField2.setText("Search");
-        SearchField2.setToolTipText("Search");
-        SearchField2.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        SearchField2.setOpaque(true);
-        CurrencySelectorPanel2.add(SearchField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 30));
 
         CurrencyScroll2.setBackground(new java.awt.Color(255, 255, 255));
         CurrencyScroll2.setBorder(null);
@@ -224,21 +214,12 @@ public class MainFrame extends JFrame {
         CurrencyList2.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         CurrencyScroll2.setViewportView(CurrencyList2);
 
-        CurrencySelectorPanel2.add(CurrencyScroll2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 50, 160));
+        CurrencySelectorPanel2.add(CurrencyScroll2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 190));
 
         HomePanel.add(CurrencySelectorPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 190, 50, 190));
 
         CurrencySelectorPanel1.setBackground(new java.awt.Color(255, 255, 255));
         CurrencySelectorPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        SearchField1.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        SearchField1.setHorizontalAlignment(JTextField.CENTER);
-        SearchField1.setText("Search");
-        SearchField1.setToolTipText("Search");
-        SearchField1.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        SearchField1.setOpaque(true);
-        CurrencySelectorPanel1.add(SearchField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 30));
-
         CurrencyScroll1.setBackground(new java.awt.Color(255, 255, 255));
         CurrencyScroll1.setBorder(null);
 
@@ -247,15 +228,9 @@ public class MainFrame extends JFrame {
         CurrencyList1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         CurrencyScroll1.setViewportView(CurrencyList1);
 
-        CurrencySelectorPanel1.add(CurrencyScroll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 50, 160));
+        CurrencySelectorPanel1.add(CurrencyScroll1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 190));
 
-        SearchField3.setFont(new java.awt.Font("Yu Gothic UI", 0, 12)); // NOI18N
-        SearchField3.setHorizontalAlignment(JTextField.CENTER);
-        SearchField3.setText("Search");
-        SearchField3.setToolTipText("Search");
-        SearchField3.setBorder(BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        SearchField3.setOpaque(true);
-        CurrencySelectorPanel1.add(SearchField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 30));
+
 
         HomePanel.add(CurrencySelectorPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 50, 190));
 
@@ -476,7 +451,7 @@ public class MainFrame extends JFrame {
         secondCurListButton.setText(firstCurSymbol);
         firstCurSymbol = firstCurListButton.getText();
         secondCurSymbol = secondCurListButton.getText();
-        firstCurrencyField.setText(String.format("%.2f", secondCur));
+        firstCurrencyField.setText(String.format("%.5f", secondCur));
         secondCurrencyField.setText(String.format("%.2f", firstCur));
         updateInputValues();
         int firstSelectedIndex = CurrencyList1.getSelectedIndex();
@@ -543,9 +518,7 @@ public class MainFrame extends JFrame {
     private JPanel MainPanel;
     private JPanel Nav;
     private JLabel RateLabel;
-    private JTextField SearchField1;
-    private JTextField SearchField2;
-    private JTextField SearchField3;
+
     private JToggleButton SettingButton;
     private JPanel SettingPanel;
     private JLabel StatusLabel;
